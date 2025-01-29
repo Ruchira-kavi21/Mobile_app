@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:real_state/screens/aboutUs.dart';
+import 'package:real_state/screens/bottomNav.dart';
 import 'package:real_state/screens/homeScreen.dart';
 import 'package:real_state/screens/lands.dart';
 import 'package:real_state/screens/login.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Login(),
+      home: Bottomnav(),
     );
   }
 }
