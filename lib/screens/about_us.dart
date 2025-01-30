@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:real_state/screens/footer.dart';
 
 class Aboutus extends StatelessWidget {
   const Aboutus({super.key});
@@ -28,10 +29,10 @@ class Aboutus extends StatelessWidget {
         backgroundColor: Colors.grey,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        // padding: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               "Why Choos Us",
               style: TextStyle(
@@ -57,7 +58,81 @@ class Aboutus extends StatelessWidget {
                 fontSize: 16,
                 color: Colors.black,
               ),
-            )
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "Keep the Focus on Property Search and Buying",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: [
+                Column(
+                  children: [
+                    Image.asset("assets/images/search-property.png",
+                        height: 50, width: 50),
+                    SizedBox(height: 10),
+                    Text(
+                      "Search Property",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Find Your Dream Home With Our Easy-To-Use Search Engine",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+                Column(
+                  children: [
+                    Image.asset("assets/images/rent-house.png",
+                        height: 50, width: 50),
+                    SizedBox(height: 10),
+                    Text(
+                      "Contact Agents",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Connect With Experienced Agents Who Can Guide You Through The Buying Process.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+                Column(
+                  children: [
+                    Image.asset("assets/images/sell-property.png",
+                        height: 50, width: 50),
+                    SizedBox(height: 10),
+                    Text(
+                      "Enjoy Property",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Move Into Your New Home And Start Living Your Best Life.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Footer()
           ],
         ),
       ),
