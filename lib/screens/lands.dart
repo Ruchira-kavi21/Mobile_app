@@ -1,9 +1,30 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:real_state/screens/list_card.dart';
 
 class Lands extends StatelessWidget {
-  const Lands({super.key});
+  final List<Map<String, String>> properties = [
+    {
+      "image": "assets/images/land1.jpg",
+      "title": "Battaramulla Land",
+      "location": "Battaramulla, Sri Lanka",
+      "price": "LKR 20 Million"
+    },
+    {
+      "image": "assets/images/land2.jpg",
+      "title": "Kandy Valley Land",
+      "location": "Kandy, Sri Lanka",
+      "price": "LKR 15 Million"
+    },
+    {
+      "image": "assets/images/land3.jpg",
+      "title": "Coastal Beach Land",
+      "location": "Galle, Sri Lanka",
+      "price": "LKR 50 Million"
+    }
+  ];
+  Lands({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +101,20 @@ class Lands extends StatelessWidget {
                 color: Colors.teal.shade600,
               ),
             ),
-          )
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: properties.length,
+            itemBuilder: (context, index) {
+              return PropertyCard(
+                imageUrl: properties[index]["image"]!,
+                title: properties[index]["title"]!,
+                location: properties[index]["location"]!,
+                price: properties[index]["price"]!,
+              );
+            },
+          ),
         ],
       ),
     );

@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 
-class property_Card extends StatelessWidget {
+class PropertyCard extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String price;
   final String location;
 
-  property_Card(
+  PropertyCard(
       {required this.imageUrl,
       required this.title,
       required this.price,
