@@ -62,7 +62,10 @@ class rentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Heven Homes"),
+        title: Text(
+          "Heven Homes",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         actions: [
           Padding(
