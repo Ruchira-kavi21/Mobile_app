@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:flutter/material.dart';
-import 'package:real_state/screens/aboutUs.dart';
-import 'package:real_state/screens/bottomNav.dart';
-import 'package:real_state/screens/homeScreen.dart';
+import 'package:real_state/screens/about_us.dart';
+import 'package:real_state/screens/bottom_nav.dart';
+import 'package:real_state/screens/home_screen.dart';
 import 'package:real_state/screens/lands.dart';
 import 'package:real_state/screens/login.dart';
 import 'package:real_state/screens/rent.dart';

@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:real_state/screens/signUp.dart';
+import 'package:real_state/screens/sign_up.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -63,7 +63,7 @@ class Login extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Signup()),
+                    MaterialPageRoute(builder: (context) => SignUp()),
                   );
                 },
                 child: Text(

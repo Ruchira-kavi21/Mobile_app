@@ -7,12 +7,14 @@ class PropertyCard extends StatelessWidget {
   final String title;
   final String price;
   final String location;
+  final String phonenumber;
 
   PropertyCard(
       {required this.imageUrl,
       required this.title,
       required this.price,
-      required this.location});
+      required this.location,
+      required this.phonenumber});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class PropertyCard extends StatelessWidget {
             borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
             child: Image.asset(
               imageUrl,
-              height: 100,
+              height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
@@ -46,6 +48,13 @@ class PropertyCard extends StatelessWidget {
                 ),
                 Text(
                   location,
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  phonenumber,
                   style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                 ),
                 SizedBox(
