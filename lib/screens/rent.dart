@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:real_state/screens/footer.dart';
 import 'package:real_state/screens/rent_card.dart';
 
 class rentScreen extends StatelessWidget {
@@ -137,6 +138,7 @@ class rentScreen extends StatelessWidget {
                 );
               },
             ),
+            Footer(),
           ],
         ),
       ),

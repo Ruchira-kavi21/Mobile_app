@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:real_state/screens/footer.dart';
 import 'package:real_state/screens/list_card.dart';
 
 class Lands extends StatelessWidget {
@@ -120,6 +121,7 @@ class Lands extends StatelessWidget {
                   );
                 },
               ),
+              Footer(),
             ],
           ),
         ));

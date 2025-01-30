@@ -19,6 +19,9 @@ class Footer extends StatelessWidget {
                 flex: 1,
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 30,
+                    ),
                     Image.asset(
                       'assets/images/main_icon.png',
                       height: 60,
@@ -42,7 +45,7 @@ class Footer extends StatelessWidget {
                         Icon(
                           Icons.phone,
                           color: Colors.teal.shade600,
-                          size: 16,
+                          size: 10,
                         ),
                         SizedBox(width: 5),
                         Text("+94 71 586 6790")
@@ -54,7 +57,7 @@ class Footer extends StatelessWidget {
                         Icon(
                           Icons.phone,
                           color: Colors.teal.shade600,
-                          size: 16,
+                          size: 10,
                         ),
                         SizedBox(width: 5),
                         Text("+94 71 588 7240")
@@ -73,7 +76,10 @@ class Footer extends StatelessWidget {
                         SizedBox(
                           width: 5,
                         ),
-                        Text("Heavenhomes@gmail.com")
+                        Text(
+                          "Homes@gmail.com",
+                          style: TextStyle(fontSize: 14),
+                        )
                       ],
                     )
                   ],

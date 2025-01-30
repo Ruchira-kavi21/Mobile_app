@@ -140,7 +140,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 40),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.all(10),
               child: Column(
                 children: [
                   Text(
@@ -172,16 +172,17 @@ class HomeScreen extends StatelessWidget {
                         )),
                         SizedBox(width: 10),
                         ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey,
-                            ),
-                            child: Text(
-                              "Subscribe",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ))
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey,
+                          ),
+                          child: Text(
+                            "Subscribe",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ],
                     ),
                   )
