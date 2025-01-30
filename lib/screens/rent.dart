@@ -1,28 +1,81 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:real_state/screens/rent_card.dart';
 
 class rentScreen extends StatelessWidget {
-  const rentScreen({super.key});
+  final List<Map<String, String>> properties = [
+    {
+      "image": "assets/images/rent1.jpg",
+      "title": "Luxury Apartment",
+      "location": "Colombo, Sri Lanka",
+      "price": "LKR 150,000/month",
+      "phonenumber": "071 234 5678"
+    },
+    {
+      "image": "assets/images/rent2.jpg",
+      "title": "Modern Condo",
+      "location": "Kandy, Sri Lanka",
+      "price": "LKR 120,000/month",
+      "phonenumber": "071 876 5432"
+    },
+    {
+      "image": "assets/images/rent3.jpg",
+      "title": "Family House",
+      "location": "Galle, Sri Lanka",
+      "price": "LKR 90,000/month",
+      "phonenumber": "071 345 6789"
+    },
+    {
+      "image": "assets/images/rent4.jpeg",
+      "title": "Cozy Studio Apartment",
+      "location": "Negombo, Sri Lanka",
+      "price": "LKR 80,000/month",
+      "phonenumber": "071 456 7890"
+    },
+    {
+      "image": "assets/images/rent5.jpg",
+      "title": "Seaside Villa",
+      "location": "Trincomalee, Sri Lanka",
+      "price": "LKR 200,000/month",
+      "phonenumber": "071 567 8901"
+    },
+    {
+      "image": "assets/images/rent6.jpg",
+      "title": "Furnished Townhouse",
+      "location": "Nuwara Eliya, Sri Lanka",
+      "price": "LKR 110,000/month",
+      "phonenumber": "071 678 9012"
+    },
+    {
+      "image": "assets/images/rent7.jpg",
+      "title": "Penthouse Apartment",
+      "location": "Colombo 07, Sri Lanka",
+      "price": "LKR 300,000/month",
+      "phonenumber": "071 789 0123"
+    }
+  ];
+  rentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Heven Homes"),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: Image.asset(
-                'assets/images/main_icon.png',
-                height: 60,
-              ),
-            )
-          ],
-          backgroundColor: Colors.grey[300],
-        ),
-        body: Column(
+      appBar: AppBar(
+        title: Text("Heven Homes"),
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 15),
+            child: Image.asset(
+              'assets/images/main_icon.png',
+              height: 60,
+            ),
+          )
+        ],
+        backgroundColor: Colors.grey[300],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
           children: [
             Stack(
               children: [
@@ -64,10 +117,29 @@ class rentScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                )
+                ),
               ],
             ),
+            SizedBox(
+              height: 20,
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: properties.length,
+              itemBuilder: (context, index) {
+                return PropertyCards(
+                  imageUrl: properties[index]["image"]!,
+                  title: properties[index]["title"]!,
+                  location: properties[index]["location"]!,
+                  price: properties[index]["price"]!,
+                  phonenumber: properties[index]["phonenumber"]!,
+                );
+              },
+            ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
