@@ -73,6 +73,9 @@ flutter:
     - assets/images/rent6.jpg
     - assets/images/rent7.jpg
     - assets/images/rent8.jpg
+    - assets/images/rent-house.png
+    - assets/images/search-property.png
+    - assets/images/sell-property.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
