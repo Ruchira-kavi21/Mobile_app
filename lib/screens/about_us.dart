@@ -34,7 +34,7 @@ class Aboutus extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Why Choos Us",
+              "Why You need to Choose Us",
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
