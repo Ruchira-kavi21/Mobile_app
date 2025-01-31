@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:real_state/screens/contact_form.dart';
 import 'package:real_state/screens/footer.dart';
 
 class Aboutus extends StatelessWidget {
@@ -63,7 +64,8 @@ class Aboutus extends StatelessWidget {
               height: 30,
             ),
             Text(
-              "Keep the Focus on Property Search and Buying",
+              "Keep the Focus on Property Search and \n" " Buying",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -128,6 +130,23 @@ class Aboutus extends StatelessWidget {
                   ],
                 ),
               ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ContactForm()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal,
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              ),
+              child: Text("Contact Us",
+                  style: TextStyle(color: Colors.white, fontSize: 16)),
             ),
             SizedBox(
               height: 50,

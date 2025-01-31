@@ -37,7 +37,7 @@ class Footer extends StatelessWidget {
                     Text(
                       "Stay in touch",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                     ),
                     SizedBox(height: 10),
                     Row(
@@ -45,10 +45,13 @@ class Footer extends StatelessWidget {
                         Icon(
                           Icons.phone,
                           color: Colors.teal.shade600,
-                          size: 10,
+                          size: 14,
                         ),
                         SizedBox(width: 5),
-                        Text("+94 71 586 6790")
+                        Text(
+                          "+94715866790",
+                          style: TextStyle(fontSize: 12),
+                        ),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -57,10 +60,13 @@ class Footer extends StatelessWidget {
                         Icon(
                           Icons.phone,
                           color: Colors.teal.shade600,
-                          size: 10,
+                          size: 14,
                         ),
                         SizedBox(width: 5),
-                        Text("+94 71 588 7240")
+                        Text(
+                          "+94715887240",
+                          style: TextStyle(fontSize: 12),
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -77,8 +83,8 @@ class Footer extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          "Homes@gmail.com",
-                          style: TextStyle(fontSize: 14),
+                          "H@gmail.com",
+                          style: TextStyle(fontSize: 12),
                         )
                       ],
                     )
@@ -92,16 +98,32 @@ class Footer extends StatelessWidget {
                   children: [
                     Text(
                       "Quick Links",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    Text("Home"),
-                    Text("Lands"),
-                    Text("Rent"),
-                    Text("Sell"),
-                    Text("About Us"),
+                    Text(
+                      "Home",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      "Lands",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      "Rent",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      "Sell",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      "About Us",
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ],
                 ),
               ),
@@ -112,7 +134,8 @@ class Footer extends StatelessWidget {
                   children: [
                     Text(
                       "Connect With Us",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                     ),
                     SizedBox(height: 10),
                     Row(
@@ -120,7 +143,10 @@ class Footer extends StatelessWidget {
                         Icon(Icons.facebook,
                             color: Colors.teal.shade600, size: 18),
                         SizedBox(width: 5),
-                        Text("Facebook"),
+                        Text(
+                          "Facebook",
+                          style: TextStyle(fontSize: 12),
+                        ),
                       ],
                     ),
                     Row(

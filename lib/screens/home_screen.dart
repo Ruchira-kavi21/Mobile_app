@@ -174,7 +174,7 @@ class HomeScreen extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
+                            backgroundColor: Colors.teal.shade600,
                           ),
                           child: Text(
                             "Subscribe",
