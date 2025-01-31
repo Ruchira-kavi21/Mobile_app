@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
         child: ListView(
           children: [
             DrawerHeader(
-              child: Text("This is header"),
+              child: Text("Welcome to heaven homes"),
               // decoration: BoxDecoration(color: Colors.white),
             ),
             ListTile(
@@ -74,6 +74,9 @@ class HomeScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Aboutus()));
               },
             ),
+            SizedBox(
+              height: 350,
+            ),
             Divider(color: Colors.black, thickness: 1),
             ListTile(
               leading: Icon(Icons.login),
@@ -81,6 +84,14 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Login()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text("Settings"),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
               },
             ),
           ],
