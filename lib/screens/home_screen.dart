@@ -6,6 +6,7 @@ import 'package:real_state/screens/footer.dart';
 import 'package:real_state/screens/lands.dart';
 import 'package:real_state/screens/login.dart';
 import 'package:real_state/screens/rent.dart';
+import 'package:real_state/screens/settings.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -46,8 +47,21 @@ class HomeScreen extends StatelessWidget {
               leading: Icon(Icons.home),
               title: Text("Home"),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500),
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        HomeScreen(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
               },
             ),
             ListTile(
@@ -55,23 +69,62 @@ class HomeScreen extends StatelessWidget {
               title: Text("Lands"),
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Lands()));
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500),
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        Lands(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
               },
             ),
             ListTile(
               leading: Icon(Icons.apartment),
               title: Text("Rent"),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => rentScreen()));
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500),
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        rentScreen(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
               },
             ),
             ListTile(
               leading: Icon(Icons.info),
               title: Text("About Us"),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Aboutus()));
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500),
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        Aboutus(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
               },
             ),
             SizedBox(
@@ -83,15 +136,41 @@ class HomeScreen extends StatelessWidget {
               title: Text("Login"),
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Login()));
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500),
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        Login(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
               },
             ),
             ListTile(
               leading: Icon(Icons.settings),
               title: Text("Settings"),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500),
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        Settings(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
               },
             ),
           ],
