@@ -27,7 +27,7 @@ class Aboutus extends StatelessWidget {
             ),
           )
         ],
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey[300],
       ),
       body: SingleChildScrollView(
         // padding: EdgeInsets.symmetric(horizontal: 20),
