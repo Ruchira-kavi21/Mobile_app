@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: no_leading_underscores_for_local_identifiers, depend_on_referenced_packages, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:real_state/providers/auth_provider.dart';
 import 'package:real_state/screens/sign_up.dart';
 
 class Login extends StatelessWidget {
@@ -8,13 +10,15 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthProvider>(context);
+    final _emailController = TextEditingController();
+    final _passwordController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       body: Center(
@@ -24,29 +28,23 @@ class Login extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/images/main_icon.png",
-                height: 80,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Login to your account",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 50,
-              ),
+              Image.asset("assets/images/main_icon.png", height: 80),
+              SizedBox(height: 20),
+              Text("Login to your account",
+                  style: Theme.of(context).textTheme.headlineMedium),
+              SizedBox(height: 50),
               TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
-                    labelText: "Email",
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.email)),
+                  labelText: "Email",
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.email),
+                ),
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(height: 15),
               TextField(
+                controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: "Password",
                   border: OutlineInputBorder(),
@@ -55,25 +53,26 @@ class Login extends StatelessWidget {
                 obscureText: true,
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.teal.shade600,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
-                child: Text(
-                  "Login",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
+              auth.isLoading
+                  ? CircularProgressIndicator()
+                  : ElevatedButton(
+                      onPressed: () async {
+                        try {
+                          await auth.login(
+                              _emailController.text, _passwordController.text);
+                          Navigator.pushReplacementNamed(context, '/home');
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('$e')),
+                          );
+                        }
+                      },
+                      child: Text("Login"),
+                    ),
               SizedBox(height: 15),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUp()),
-                  );
-                },
+                onTap: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => SignUp())),
                 child: Text(
                   "Don't have an account? Register here",
                   style: TextStyle(
