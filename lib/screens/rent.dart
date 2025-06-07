@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:real_state/providers/auth_provider.dart';
 import 'package:real_state/providers/property_provider.dart';
 import 'package:real_state/screens/footer.dart';
-import 'package:real_state/screens/rent_card.dart';
+import 'package:real_state/screens/rent_card.dart'; // Confirm this import
 
 class rentScreen extends StatelessWidget {
   const rentScreen({super.key});
@@ -97,7 +97,10 @@ class rentScreen extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: properties.rentProperties.length,
                     itemBuilder: (context, index) {
+                      print(
+                          'Rendering PropertyCards for index $index: ${properties.rentProperties[index]}'); // Debug
                       return PropertyCards(
+                        id: properties.rentProperties[index]['id']!,
                         imageUrl: properties.rentProperties[index]["image"]!,
                         title: properties.rentProperties[index]["title"]!,
                         location: properties.rentProperties[index]["location"]!,

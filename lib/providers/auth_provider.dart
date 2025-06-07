@@ -53,7 +53,7 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
     try {
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/register'),
+        Uri.parse('http://127.0.0.1:8000/api/register'), // Match browser port
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'name': name,
