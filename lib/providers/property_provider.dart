@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:sensors_plus/sensors_plus.dart';
 
 class PropertyProvider with ChangeNotifier {
   List<Map<String, String>> _landProperties = [];
@@ -15,6 +19,12 @@ class PropertyProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   Future<void> fetchProperties(String offerType) async {
+    final connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      await _handleOfflineData(offerType);
+      return;
+    }
+
     _isLoading = true;
     notifyListeners();
     try {
@@ -71,7 +81,7 @@ class PropertyProvider with ChangeNotifier {
       await _handleOfflineData(offerType);
     } finally {
       _isLoading = false;
-      notifyListeners(); // Ensure UI updates after offline load
+      notifyListeners();
     }
   }
 
@@ -129,11 +139,11 @@ class PropertyProvider with ChangeNotifier {
   }
 
   Future<void> _handleOfflineData(String offerType) async {
-    final prefs = await SharedPreferences.getInstance();
-    final offlineData = prefs.getString('${offerType}_properties');
-    print('Offline data for $offerType: $offlineData'); // Debug log
-    if (offlineData != null) {
-      try {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final offlineData = prefs.getString('${offerType}_properties');
+      print('Offline data for $offerType: $offlineData');
+      if (offlineData != null) {
         final data = jsonDecode(offlineData) as List;
         if (offerType == 'sale') {
           _landProperties =
@@ -142,39 +152,137 @@ class PropertyProvider with ChangeNotifier {
           _rentProperties =
               data.map((item) => item as Map<String, String>).toList();
         }
-      } catch (e) {
-        print('Error decoding offline data for $offerType: $e');
-      }
-    } else {
-      final defaultProperties = offerType == 'sale'
-          ? [
-              {
-                'id': '1',
-                'image': 'assets/images/land1.jpeg',
-                'title': 'Battaramulla Land',
-                'location': 'Battaramulla, Sri Lanka',
-                'price': 'LKR 20 Million',
-                'phonenumber': '071 586 6790',
-              },
-            ]
-          : [
-              {
-                'id': '1',
-                'image': 'assets/images/rent1.jpg',
-                'title': 'Luxury Apartment',
-                'location': 'Colombo, Sri Lanka',
-                'price': 'LKR 150,000/month',
-                'phonenumber': '071 234 5678',
-              },
-            ];
-      if (offerType == 'sale') {
-        _landProperties = defaultProperties;
-        await prefs.setString('land_properties', jsonEncode(defaultProperties));
+        print('Successfully loaded offline data for $offerType');
       } else {
-        _rentProperties = defaultProperties;
-        await prefs.setString('rent_properties', jsonEncode(defaultProperties));
+        final defaultProperties = offerType == 'sale'
+            ? [
+                {
+                  'id': '1',
+                  'image': 'assets/images/land1.jpeg',
+                  'title': 'Battaramulla Land',
+                  'location': 'Battaramulla, Sri Lanka',
+                  'price': 'LKR 20 Million',
+                  'phonenumber': '071 586 6790',
+                },
+              ]
+            : [
+                {
+                  'id': '1',
+                  'image': 'assets/images/rent1.jpg',
+                  'title': 'Luxury Apartment',
+                  'location': 'Colombo, Sri Lanka',
+                  'price': 'LKR 150,000/month',
+                  'phonenumber': '071 234 5678',
+                },
+              ];
+        if (offerType == 'sale') {
+          _landProperties = defaultProperties;
+          await prefs.setString(
+              'land_properties', jsonEncode(defaultProperties));
+        } else {
+          _rentProperties = defaultProperties;
+          await prefs.setString(
+              'rent_properties', jsonEncode(defaultProperties));
+        }
+        print('Loaded default properties for $offerType');
       }
-      print('Loaded default properties for $offerType');
+    } catch (e) {
+      print('Error in _handleOfflineData for $offerType: $e');
     }
+  }
+
+  Future<String?> submitProperty({
+    required String title,
+    required String location,
+    required String price,
+    required String phonenumber,
+    String? description,
+    String? propertyType,
+    String? propertyStatus,
+    String? finishStatus,
+    required String offerType,
+    XFile? image,
+    Position? position,
+    List<double>? acceleration,
+  }) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('auth_token');
+      if (token == null) {
+        throw Exception('Please log in to submit a property');
+      }
+
+      final request = http.MultipartRequest(
+        'POST',
+        Uri.parse('http://127.0.0.1:8000/api/properties'),
+      );
+      request.headers['Authorization'] = 'Bearer $token';
+      request.fields['property_name'] = title;
+      request.fields['property_address'] = location;
+      request.fields['property_price'] = price.replaceAll(RegExp(r'[^\d.]'), '');
+      request.fields['phone_number'] = phonenumber;
+      if (description != null) request.fields['property_description'] = description;
+      if (propertyType != null) request.fields['property_type'] = propertyType;
+      if (propertyStatus != null) request.fields['property_status'] = propertyStatus;
+      if (finishStatus != null) request.fields['finish_status'] = finishStatus;
+      request.fields['offer_type'] = offerType;
+      if (position != null) {
+        request.fields['latitude'] = position.latitude.toString();
+        request.fields['longitude'] = position.longitude.toString();
+      }
+      if (acceleration != null) {
+        request.fields['acceleration_x'] = acceleration[0].toString();
+        request.fields['acceleration_y'] = acceleration[1].toString();
+        request.fields['acceleration_z'] = acceleration[2].toString();
+      }
+      if (image != null) {
+        request.files.add(await http.MultipartFile.fromPath('image_1', image.path));
+      }
+
+      print('Request Fields: ${request.fields}');
+      if (image != null) print('Image File: ${image.path}');
+
+      final response = await request.send();
+      final responseData = await http.Response.fromStream(response);
+
+      print('Status Code: ${response.statusCode}');
+      print('Response Body: ${responseData.body}');
+
+      if (response.statusCode == 201) {
+        final data = jsonDecode(responseData.body);
+        print('Property submitted successfully: $data');
+        return data['message'];
+      } else {
+        throw Exception('Failed to submit property: ${responseData.body}');
+      }
+    } catch (e) {
+      print('Error submitting property: $e');
+      return null;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<Position?> getCurrentLocation() async {
+    try {
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) return null;
+      }
+      if (permission == LocationPermission.deniedForever) return null;
+      return await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+    } catch (e) {
+      print('Error getting location: $e');
+      return null;
+    }
+  }
+
+  Stream<List<double>> getAccelerometerData() {
+    return accelerometerEvents.map((event) => [event.x, event.y, event.z]);
   }
 }
